@@ -35,6 +35,6 @@ export const config = createConfig(
     autoConnect: true,
     appName: "P4W3-Organisation-dApp",
     walletConnectProjectId,
-    chains: [mainnet, sapphireTestnet],
+    chains: [sapphireTestnet],
   })
 );
