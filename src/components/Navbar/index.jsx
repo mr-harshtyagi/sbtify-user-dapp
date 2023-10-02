@@ -41,7 +41,7 @@ const navListItems = [
     active: false,
   },
   {
-    label: "Request for Verification",
+    label: "Verification Requests",
     icon: CheckBadgeIcon,
     href: "/verification",
     active: false,
