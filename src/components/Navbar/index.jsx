@@ -112,7 +112,7 @@ export default function TopNavbar() {
     <div className="mx-8">
       <br />
       <Navbar className="mx-auto p-2 lg:rounded-[16px] lg:pl-6">
-        <div className="relative mx-auto flex items-center text-blue-gray-900">
+        <div className="mx-auto flex justify-between items-center text-blue-gray-900">
           <Typography
             as="a"
             href="/"
@@ -134,7 +134,7 @@ export default function TopNavbar() {
             <Bars2Icon className="h-6 w-6" />
           </IconButton>
           {/* <ProfileMenu /> */}
-          <div className="absolute top-2/4 right-[-120px] hidden -translate-x-2/4 -translate-y-2/4 lg:block">
+          <div className="hidden lg:block ">
             <ConnectKitButton showBalance={true} />
           </div>
         </div>
