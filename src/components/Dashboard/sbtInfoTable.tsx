@@ -34,35 +34,31 @@ import {
 //   },
 // ];
 
-const TABLE_HEAD = ["SBT", "Total Minted", "Status", ""];
+const TABLE_HEAD = ["SBT Address", "Token ID", "Issued By"];
 
 const TABLE_ROWS = [
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
     ensName: "vitalik.eth",
-    walletAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     sbtSymbol: "DID",
     sbtName: "Digital Identity Token",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
-    totalIssued: 20,
-    active: true,
-    updatedAt: "23/04/18",
+    tokenID: 20,
+    issuedBy: "Organization",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
     ensName: "harsh.eth",
-    walletAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     sbtSymbol: "Aadhar",
     sbtName: "Unique Identity Token",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
-    totalIssued: 1560000,
-    active: false,
-    updatedAt: "23/04/18",
+    tokenID: 1560000,
+    issuedBy: "Organization",
   },
 ];
 
 export function SbtInfoTable() {
-  const router = useRouter();
+  // const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRows, setFilteredRows] = useState(TABLE_ROWS);
   const [tooltipContent, setTooltipContent] = useState("Copy Address");
@@ -78,10 +74,10 @@ export function SbtInfoTable() {
     }
   }, [searchTerm]);
 
-  const handleClick = () => {
-    // replace hard coded string with sbt name
-    router.push(`/issue/?tokenName=${"DID"}&tokenAddress=${"0x123456789"}`);
-  };
+  // const handleClick = () => {
+  //   // replace hard coded string with sbt name
+  //   router.push(`/issue/?tokenName=${"DID"}&tokenAddress=${"0x123456789"}`);
+  // };
 
   function copyAddress(address: string) {
     navigator.clipboard.writeText(address);
@@ -97,11 +93,10 @@ export function SbtInfoTable() {
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-              Allowed SBTs
+              Issued SBTs
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              List of all soul-bound tokens (SBTs) that can be issued by
-              Organization
+              List of all soul-bound tokens (SBTs) that are issued to user.
             </Typography>
           </div>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
@@ -155,7 +150,7 @@ export function SbtInfoTable() {
             ) : (
               filteredRows.map(
                 (
-                  { sbtName, sbtSymbol, sbtAddress, totalIssued, active },
+                  { sbtName, sbtSymbol, sbtAddress, tokenID, issuedBy },
                   index
                 ) => {
                   const isLast = index === TABLE_ROWS.length - 1;
@@ -206,31 +201,20 @@ export function SbtInfoTable() {
                             color="black"
                             className="font-bold"
                           >
-                            {totalIssued.toLocaleString()} {sbtSymbol}{" "}
+                            {tokenID}
                           </Typography>
                         </div>
                       </td>
                       <td className={classes}>
-                        <div className="w-max">
-                          <Chip
-                            variant="ghost"
-                            size="sm"
-                            value={active ? "Active" : "Inactive"}
-                            color={active ? "green" : "blue-gray"}
-                          />
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="black"
+                            className="font-bold"
+                          >
+                            {issuedBy}
+                          </Typography>
                         </div>
-                      </td>
-
-                      <td className={classes}>
-                        {/* <Tooltip content="Issue this token"> */}
-                        <Button
-                          color="green"
-                          disabled={!active}
-                          onClick={handleClick}
-                        >
-                          Issue {sbtSymbol}
-                        </Button>
-                        {/* </Tooltip> */}
                       </td>
                     </tr>
                   );
