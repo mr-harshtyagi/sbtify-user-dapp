@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import TopNavbar from "@/components/Navbar";
 
 export const metadata = {
-  title: "SBTify-user",
+  title: "SBTify-User",
 };
 
 export default function RootLayout({

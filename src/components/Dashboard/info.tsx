@@ -44,7 +44,7 @@ export function InfoCard() {
         className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 "
       >
         <Typography variant="h1" color="gray" className="font-normal uppercase">
-          Welcome, <span className="text-blue-300 font-bold"> XYZ Corp.</span>
+          Welcome, <span className="text-blue-300 font-bold"> XYZ</span>
         </Typography>
         <Typography variant="h6" color="gray" className="font-normal uppercase">
           Wallet Address :{" "}
@@ -76,19 +76,19 @@ export function InfoCard() {
           <li className="flex items-center gap-4">
             <CheckBadgeIcon className="h-10 text-green-400" />
             <Typography className="font-semibold">
-              Digital Identity (DID) Verified
+              Auth Verified User
             </Typography>
           </li>
-          <li className="flex items-center gap-4">
+          {/* <li className="flex items-center gap-4">
             <IdentificationIcon className="h-10 text-green-400" />
 
             <Typography className="font-semibold">Can issue SBTs</Typography>
-          </li>
+          </li> */}
           <li className="flex items-center gap-4">
             <ViewfinderCircleIcon className="h-10 text-green-400" />
 
             <Typography className="font-semibold">
-              Can create verification requests
+              Can Request for verification
             </Typography>
           </li>
         </ul>
