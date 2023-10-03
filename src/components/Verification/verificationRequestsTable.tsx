@@ -35,7 +35,7 @@ import {
 //   },
 // ];
 
-const TABLE_HEAD = ["User Wallet", "SBT", "Status", "Request Date", ""];
+const TABLE_HEAD = ["SBT", "Status", "Request Date", ""];
 
 const TABLE_ROWS = [
   {
@@ -172,12 +172,11 @@ export default function VerificationRequestsTable({
               filteredRows.map(
                 (
                   {
-                    img,
                     userName,
-                    walletAddress,
+
                     sbtName,
                     sbtAddress,
-                    online,
+
                     status,
                     date,
                   },
@@ -190,42 +189,6 @@ export default function VerificationRequestsTable({
 
                   return (
                     <tr key={userName}>
-                      <td className={classes}>
-                        <div className="flex items-center gap-3">
-                          <Avatar src={img} alt={userName} size="sm" />
-                          <div className="flex flex-col">
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {userName}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal opacity-70"
-                            >
-                              {walletAddress.substring(0, 6) +
-                                "..." +
-                                walletAddress.substring(
-                                  walletAddress.length - 6
-                                )}
-                              {/* Add a span of copy icon here 🟡*/}
-                              <Tooltip content={tooltipContent}>
-                                <span
-                                  onClick={() => {
-                                    copyAddress(walletAddress);
-                                  }}
-                                  className="inline-flex ml-1 h-[15px] cursor-pointer"
-                                >
-                                  <DocumentDuplicateIcon />
-                                </span>
-                              </Tooltip>
-                            </Typography>
-                          </div>
-                        </div>
-                      </td>
                       <td className={classes}>
                         <div className="flex flex-col">
                           <Typography
