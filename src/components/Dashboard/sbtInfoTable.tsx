@@ -25,7 +25,7 @@ import {
 import { ViewModal } from "./viewModal";
 import { sbts } from "@/constants/sbt";
 
-const TABLE_HEAD = ["SBT Address", "Token ID", ""];
+const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Token ID", ""];
 
 const SBTS = Object.keys(sbts).map((key) => {
   return {
@@ -134,7 +134,7 @@ export function SbtInfoTable() {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {sbtName} {`(${sbtSymbol})`}
+                              {sbtName}
                             </Typography>
                             <Typography
                               variant="small"
@@ -157,6 +157,17 @@ export function SbtInfoTable() {
                               </Tooltip>
                             </Typography>
                           </div>
+                        </div>
+                      </td>
+                      <td className={classes}>
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="black"
+                            className="font-bold"
+                          >
+                            {sbtSymbol}
+                          </Typography>
                         </div>
                       </td>
                       <td className={classes}>
