@@ -16,6 +16,8 @@ import {
   Chip,
   Tooltip,
 } from "@material-tailwind/react";
+import { sbts } from "@/constants/sbt";
+import { useContractReads } from "wagmi";
 
 const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Requested By", "Status", ""];
 
@@ -55,22 +57,72 @@ const TABLE_ROWS = [
   },
 ];
 
+const SBTS = Object.keys(sbts).map((key) => {
+  return {
+    sbtName: sbts[key].sbtName,
+    sbtSymbol: sbts[key].sbtSymbol,
+    sbtAddress: sbts[key].sbtAddress,
+    tokenId: sbts[key].tokenId,
+    abi: sbts[key].abi,
+    active: sbts[key].active,
+  };
+});
+
 export default function VerificationRequestsTable() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRows, setFilteredRows] = useState(TABLE_ROWS);
   const [tooltipContent, setTooltipContent] = useState("Copy Address");
+  const [verificationRequests, setVerificationrequests] = useState([]);
+
+  const { data, isSuccess, isLoading } = useContractReads({
+    contracts: [
+      {
+        address: SBTS[0].sbtAddress,
+        abi: SBTS[0].abi,
+        functionName: "getVerificationRequestsForUser",
+      },
+      {
+        address: SBTS[1].sbtAddress,
+        abi: SBTS[1].abi,
+        functionName: "getVerificationRequestsForUser",
+      },
+      {
+        address: SBTS[2].sbtAddress,
+        abi: SBTS[2].abi,
+        functionName: "getVerificationRequestsForUser",
+      },
+      {
+        address: SBTS[3].sbtAddress,
+        abi: SBTS[3].abi,
+        functionName: "getVerificationRequestsForUser",
+      },
+    ],
+    onSuccess: (data: any) => {
+      let allWalletSbts: any = [];
+      console.log("ALL VERIFICATION REQUESTS", data);
+
+      // setVerificationrequests(allWalletSbts);
+    },
+  });
 
   useEffect(() => {
     if (searchTerm === "") {
-      setFilteredRows(TABLE_ROWS);
+      setFilteredRows(verificationRequests);
     } else {
-      let filtered = TABLE_ROWS.filter((row) =>
-        row.sbtName.toLowerCase().includes(searchTerm.toLowerCase())
+      const filtered = verificationRequests.filter(
+        (row: { sbtName: string; sbtSymbol: string; tokenId: number }) => {
+          return (
+            row.sbtName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            row.sbtSymbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            row.tokenId.toString().includes(searchTerm.toLowerCase())
+          );
+        }
       );
       setFilteredRows(filtered);
+      console.log("FILTERED", filtered);
     }
-  }, [searchTerm]);
+  }, [searchTerm, verificationRequests]);
 
   const handleClick = () => {
     // replace hard coded string with sbt userName

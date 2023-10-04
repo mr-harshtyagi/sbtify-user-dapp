@@ -15,6 +15,7 @@ import {
 } from "@material-tailwind/react";
 import { ViewModal } from "./viewModal";
 import { sbts } from "@/constants/sbt";
+import { useContractReads } from "wagmi";
 
 const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Token ID", ""];
 
@@ -24,25 +25,106 @@ const SBTS = Object.keys(sbts).map((key) => {
     sbtSymbol: sbts[key].sbtSymbol,
     sbtAddress: sbts[key].sbtAddress,
     tokenId: sbts[key].tokenId,
+    abi: sbts[key].abi,
     active: sbts[key].active,
   };
 });
 
 export function SbtInfoTable() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredRows, setFilteredRows] = useState(SBTS);
+  const [filteredRows, setFilteredRows] = useState([]);
+  const [walletSbts, setWalletSbts] = useState([]);
   const [tooltipContent, setTooltipContent] = useState("Copy Address");
+
+  const { data, isSuccess, isLoading } = useContractReads({
+    contracts: [
+      {
+        address: SBTS[0].sbtAddress,
+        abi: SBTS[0].abi,
+        functionName: "getTokenIdsByWallet",
+      },
+      {
+        address: SBTS[1].sbtAddress,
+        abi: SBTS[1].abi,
+        functionName: "getTokenIdsByWallet",
+      },
+      {
+        address: SBTS[2].sbtAddress,
+        abi: SBTS[2].abi,
+        functionName: "getTokenIdsByWallet",
+      },
+      {
+        address: SBTS[3].sbtAddress,
+        abi: SBTS[3].abi,
+        functionName: "getTokenIdsByWallet",
+      },
+    ],
+    onSuccess: (data: any) => {
+      let allWalletSbts: any = [];
+
+      let educationIdSbts = data[0].result;
+      let employeeIdSbts = data[1].result;
+      let nationalIdSbts = data[2].result;
+      let passportIdSbts = data[3].result;
+
+      educationIdSbts.forEach((element: any) => {
+        allWalletSbts.push({
+          sbtName: SBTS[0].sbtName,
+          sbtSymbol: SBTS[0].sbtSymbol,
+          sbtAddress: SBTS[0].sbtAddress,
+          tokenId: Number(element),
+        });
+      });
+
+      employeeIdSbts.forEach((element: any) => {
+        allWalletSbts.push({
+          sbtName: SBTS[1].sbtName,
+          sbtSymbol: SBTS[1].sbtSymbol,
+          sbtAddress: SBTS[1].sbtAddress,
+          tokenId: Number(element),
+        });
+      });
+
+      nationalIdSbts.forEach((element: any) => {
+        allWalletSbts.push({
+          sbtName: SBTS[2].sbtName,
+          sbtSymbol: SBTS[2].sbtSymbol,
+          sbtAddress: SBTS[2].sbtAddress,
+          tokenId: Number(element),
+        });
+      });
+
+      passportIdSbts.forEach((element: any) => {
+        allWalletSbts.push({
+          sbtName: SBTS[3].sbtName,
+          sbtSymbol: SBTS[3].sbtSymbol,
+          sbtAddress: SBTS[3].sbtAddress,
+          tokenId: Number(element),
+        });
+      });
+
+      setWalletSbts(allWalletSbts);
+      console.log("ALL SBTS", allWalletSbts);
+    },
+  });
 
   useEffect(() => {
     if (searchTerm === "") {
-      setFilteredRows(SBTS);
+      setFilteredRows(walletSbts);
     } else {
-      const filtered = SBTS.filter((row) =>
-        row.sbtName.toLowerCase().includes(searchTerm.toLowerCase())
+      const filtered = walletSbts.filter(
+        (row: { sbtName: string; sbtSymbol: string; tokenId: number }) => {
+          return (
+            row.sbtName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            row.sbtSymbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            row.tokenId.toString().includes(searchTerm.toLowerCase())
+          );
+        }
       );
       setFilteredRows(filtered);
+      console.log("FILTERED", filtered);
     }
-  }, [searchTerm]);
+  }, [searchTerm, walletSbts]);
 
   function copyAddress(address: string) {
     navigator.clipboard.writeText(address);
@@ -102,7 +184,7 @@ export function SbtInfoTable() {
             </tr>
           </thead>
           <tbody>
-            {filteredRows.length === 0 ? (
+            {filteredRows.length == 0 ? (
               <>
                 <div className="justify-center w-full m-4">No data found</div>
               </>
@@ -132,9 +214,11 @@ export function SbtInfoTable() {
                               color="blue-gray"
                               className="font-normal opacity-70"
                             >
-                              {sbtAddress.substring(0, 6) +
+                              {String(sbtAddress).substring(0, 6) +
                                 "..." +
-                                sbtAddress.substring(sbtAddress.length - 6)}
+                                String(sbtAddress).substring(
+                                  String(sbtAddress).length - 6
+                                )}
                               {/* Add a span of copy icon here 🟢*/}
                               <Tooltip content={tooltipContent}>
                                 <span
@@ -175,7 +259,11 @@ export function SbtInfoTable() {
 
                       <td className={classes}>
                         <div className="flex flex-col">
-                          <ViewModal sbtName={sbtName} />
+                          <ViewModal
+                            sbtName={sbtName}
+                            tokenId={tokenId}
+                            sbtAddress={sbtAddress}
+                          />
                         </div>
                       </td>
                     </tr>
