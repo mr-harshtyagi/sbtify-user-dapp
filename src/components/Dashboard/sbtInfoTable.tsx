@@ -200,7 +200,7 @@ export function SbtInfoTable() {
                           </Typography>
                         </div>
                       </td>
-                      {/* Allow , Deny for pending revoke for accepted */}
+
                       <td className={classes}>
                         <div className="flex flex-col">
                           <Button

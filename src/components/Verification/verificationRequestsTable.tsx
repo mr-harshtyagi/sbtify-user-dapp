@@ -35,7 +35,7 @@ import {
 //   },
 // ];
 
-const TABLE_HEAD = ["SBT", "Status", "Request Date", ""];
+const TABLE_HEAD = ["SBT", "Requested By", "Status", ""];
 
 const TABLE_ROWS = [
   {
@@ -46,7 +46,7 @@ const TABLE_ROWS = [
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
     online: true,
     status: "Pending",
-    date: "23/04/18",
+    requestedBy: "abc",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
@@ -56,7 +56,7 @@ const TABLE_ROWS = [
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
     online: false,
     status: "Accepted",
-    date: "23/04/18",
+    requestedBy: "abc",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
@@ -66,13 +66,11 @@ const TABLE_ROWS = [
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
     online: false,
     status: "Rejected",
-    date: "19/09/17",
+    requestedBy: "abc",
   },
 ];
 
-export default function VerificationRequestsTable({
-  requestVerification,
-}: any) {
+export default function VerificationRequestsTable() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRows, setFilteredRows] = useState(TABLE_ROWS);
@@ -115,7 +113,7 @@ export default function VerificationRequestsTable({
               verification.
             </Typography>
           </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+          {/* <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
             <Button
               onClick={requestVerification}
               color="blue"
@@ -125,7 +123,7 @@ export default function VerificationRequestsTable({
               <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Create new
               request
             </Button>
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full md:w-72">
@@ -171,15 +169,7 @@ export default function VerificationRequestsTable({
             ) : (
               filteredRows.map(
                 (
-                  {
-                    userName,
-
-                    sbtName,
-                    sbtAddress,
-
-                    status,
-                    date,
-                  },
+                  { userName, sbtName, sbtAddress, status, requestedBy },
                   index
                 ) => {
                   const isLast = index === TABLE_ROWS.length - 1;
@@ -220,6 +210,16 @@ export default function VerificationRequestsTable({
                           </Typography>
                         </div>
                       </td>
+
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {requestedBy}
+                        </Typography>
+                      </td>
                       <td className={classes}>
                         <div className="w-max">
                           <Chip
@@ -241,15 +241,6 @@ export default function VerificationRequestsTable({
                             }
                           />
                         </div>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
                       </td>
                       <td className={classes}>
                         <Tooltip content="You can view this SBT">
