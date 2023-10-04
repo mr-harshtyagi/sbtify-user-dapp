@@ -75,7 +75,7 @@ export function InfoCard() {
             <ViewfinderCircleIcon className="h-10 text-green-400" />
 
             <Typography className="font-semibold">
-              Can Request for verification
+              Can see verification request
             </Typography>
           </li>
         </ul>
