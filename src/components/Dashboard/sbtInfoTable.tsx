@@ -22,60 +22,36 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
-
-// const TABS = [
-//   {
-//     label: "Active",
-//     value: "all",
-//   },
-//   {
-//     label: "Inactive",
-//     value: "monitored",
-//   },
-// ];
+import { ViewModal } from "./viewModal";
+import { sbts } from "@/constants/sbt";
 
 const TABLE_HEAD = ["SBT Address", "Token ID", ""];
 
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    ensName: "vitalik.eth",
-    sbtSymbol: "DID",
-    sbtName: "Digital Identity Token",
-    sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
-    tokenID: 20,
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    ensName: "harsh.eth",
-    sbtSymbol: "Aadhar",
-    sbtName: "Unique Identity Token",
-    sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
-    tokenID: 1560000,
-  },
-];
+const SBTS = Object.keys(sbts).map((key) => {
+  return {
+    sbtName: sbts[key].sbtName,
+    sbtSymbol: sbts[key].sbtSymbol,
+    sbtAddress: sbts[key].sbtAddress,
+    tokenId: sbts[key].tokenId,
+    active: sbts[key].active,
+  };
+});
 
 export function SbtInfoTable() {
-  // const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredRows, setFilteredRows] = useState(TABLE_ROWS);
+  const [filteredRows, setFilteredRows] = useState(SBTS);
   const [tooltipContent, setTooltipContent] = useState("Copy Address");
 
   useEffect(() => {
     if (searchTerm === "") {
-      setFilteredRows(TABLE_ROWS);
+      setFilteredRows(SBTS);
     } else {
-      const filtered = TABLE_ROWS.filter((row) =>
+      const filtered = SBTS.filter((row) =>
         row.sbtName.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredRows(filtered);
     }
   }, [searchTerm]);
-
-  // const handleClick = () => {
-  //   // replace hard coded string with sbt name
-  //   router.push(`/issue/?tokenName=${"DID"}&tokenAddress=${"0x123456789"}`);
-  // };
 
   function copyAddress(address: string) {
     navigator.clipboard.writeText(address);
@@ -96,12 +72,6 @@ export function SbtInfoTable() {
             <Typography color="gray" className="mt-1 font-normal">
               List of all soul-bound tokens (SBTs) that are issued to user.
             </Typography>
-          </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-            {/* <Button color="blue" className="flex items-center gap-3" size="sm">
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Request new
-              SBT
-            </Button> */}
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -147,8 +117,8 @@ export function SbtInfoTable() {
               </>
             ) : (
               filteredRows.map(
-                ({ sbtName, sbtSymbol, sbtAddress, tokenID }, index) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
+                ({ sbtName, sbtSymbol, sbtAddress, tokenId }, index) => {
+                  const isLast = index === SBTS.length - 1;
                   const classes = isLast
                     ? "p-4"
                     : "p-4 border-b border-blue-gray-50";
@@ -196,20 +166,14 @@ export function SbtInfoTable() {
                             color="black"
                             className="font-bold"
                           >
-                            {tokenID}
+                            {tokenId}
                           </Typography>
                         </div>
                       </td>
 
                       <td className={classes}>
                         <div className="flex flex-col">
-                          <Button
-                            color="green"
-                            type="submit"
-                            variant="gradient"
-                          >
-                            View
-                          </Button>
+                          <ViewModal sbtName={sbtName} />
                         </div>
                       </td>
                     </tr>
