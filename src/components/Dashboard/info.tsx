@@ -61,24 +61,9 @@ export function InfoCard() {
             </span>
           </Tooltip>
         </Typography>
-
-        {/* <Typography
-          variant="h3"
-          color="white"
-          className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-        >
-          <span className="mt-2 text-4xl">$</span>29{" "}
-          <span className="self-end text-4xl">/mo</span>
-        </Typography> */}
       </CardHeader>
       <CardBody className="p-0">
         <ul className="flex flex-row gap-4 justify-around">
-          {/* <li className="flex items-center gap-4">
-            <CheckBadgeIcon className="h-10 text-green-400" />
-            <Typography className="font-semibold">
-              Auth Verified User
-            </Typography>
-          </li> */}
           <li className="flex items-center gap-4">
             <IdentificationIcon className="h-10 text-green-400" />
 
