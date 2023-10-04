@@ -35,7 +35,7 @@ import {
 //   },
 // ];
 
-const TABLE_HEAD = ["SBT", "Requested By", "Status", ""];
+const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Requested By", "Status", ""];
 
 const TABLE_ROWS = [
   {
@@ -44,9 +44,10 @@ const TABLE_ROWS = [
     walletAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     sbtName: "DID (Digital Identity Token)",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
+    sbtSymbol: "DID",
     online: true,
     status: "Pending",
-    requestedBy: "abc",
+    requestedBy: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
@@ -54,9 +55,10 @@ const TABLE_ROWS = [
     walletAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     sbtName: "Programator",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
+    sbtSymbol: "DID",
     online: false,
     status: "Accepted",
-    requestedBy: "abc",
+    requestedBy: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
@@ -64,9 +66,10 @@ const TABLE_ROWS = [
     walletAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     sbtName: "Executive",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
+    sbtSymbol: "DID",
     online: false,
     status: "Rejected",
-    requestedBy: "abc",
+    requestedBy: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f9",
   },
 ];
 
@@ -124,17 +127,6 @@ export default function VerificationRequestsTable() {
               Here are all the requests sent by organizations for verification.
             </Typography>
           </div>
-          {/* <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-            <Button
-              onClick={requestVerification}
-              color="blue"
-              className="flex items-center gap-3"
-              size="sm"
-            >
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Create new
-              request
-            </Button>
-          </div> */}
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full md:w-72">
@@ -180,7 +172,14 @@ export default function VerificationRequestsTable() {
             ) : (
               filteredRows.map(
                 (
-                  { userName, sbtName, sbtAddress, status, requestedBy },
+                  {
+                    userName,
+                    sbtName,
+                    sbtAddress,
+                    sbtSymbol,
+                    status,
+                    requestedBy,
+                  },
                   index
                 ) => {
                   const isLast = index === TABLE_ROWS.length - 1;
@@ -221,14 +220,38 @@ export default function VerificationRequestsTable() {
                           </Typography>
                         </div>
                       </td>
+                      <td className={classes}>
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {sbtSymbol}
+                          </Typography>
+                        </div>
+                      </td>
 
                       <td className={classes}>
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal opacity-70"
                         >
-                          {requestedBy}
+                          {requestedBy.substring(0, 6) +
+                            "..." +
+                            requestedBy.substring(requestedBy.length - 6)}
+                          {/* Add a span of copy icon here 🟡 */}
+                          <Tooltip content={tooltipContent}>
+                            <span
+                              onClick={() => {
+                                copyAddress(sbtAddress);
+                              }}
+                              className="inline-flex ml-1 h-[15px] cursor-pointer"
+                            >
+                              <DocumentDuplicateIcon />
+                            </span>
+                          </Tooltip>
                         </Typography>
                       </td>
                       <td className={classes}>
