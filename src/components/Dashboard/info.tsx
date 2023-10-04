@@ -44,7 +44,7 @@ export function InfoCard() {
         className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 "
       >
         <Typography variant="h1" color="gray" className="font-normal uppercase">
-          Welcome, <span className="text-blue-300 font-bold"> XYZ</span>
+          Welcome, <span className="text-blue-300 font-bold"> USER</span>
         </Typography>
         <Typography variant="h6" color="gray" className="font-normal uppercase">
           Wallet Address :{" "}
@@ -73,17 +73,19 @@ export function InfoCard() {
       </CardHeader>
       <CardBody className="p-0">
         <ul className="flex flex-row gap-4 justify-around">
-          <li className="flex items-center gap-4">
+          {/* <li className="flex items-center gap-4">
             <CheckBadgeIcon className="h-10 text-green-400" />
             <Typography className="font-semibold">
               Auth Verified User
             </Typography>
-          </li>
-          {/* <li className="flex items-center gap-4">
+          </li> */}
+          <li className="flex items-center gap-4">
             <IdentificationIcon className="h-10 text-green-400" />
 
-            <Typography className="font-semibold">Can issue SBTs</Typography>
-          </li> */}
+            <Typography className="font-semibold">
+              Can view issued SBTs
+            </Typography>
+          </li>
           <li className="flex items-center gap-4">
             <ViewfinderCircleIcon className="h-10 text-green-400" />
 

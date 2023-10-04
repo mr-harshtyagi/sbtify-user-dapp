@@ -26,7 +26,6 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Button,
 } from "@material-tailwind/react";
 import { ConnectKitButton } from "connectkit";
 
@@ -49,10 +48,10 @@ export default function Homepage() {
               Hello there 👋
             </Typography>
             <Typography>
-              If you are an organisation, Connect your wallet to get started.
+              If you are an User, Connect your wallet to get started.
               <br />
               <br />
-              In case you are a user,{" "}
+              In case you are a Organization,{" "}
               <a
                 href="https://www.google.com"
                 className="cursor-pointer underline"
