@@ -24,6 +24,7 @@ import {
 } from "@material-tailwind/react";
 import { ViewModal } from "./viewModal";
 import { sbts } from "@/constants/sbt";
+import PassportId from "../SBTs/PassportId";
 
 const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Token ID", ""];
 

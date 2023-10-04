@@ -6,10 +6,32 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import EducationalId from "../SBTs/EducationalId";
+import PassportId from "../SBTs/PassportId";
+import NationalId from "../SBTs/NationalId";
+import EmployeeId from "../SBTs/EmployeeId";
 
-export function ViewModal({ sbtName }: { sbtName: string }) {
+interface ViewModalProps {
+  sbtName: string;
+}
+
+export function ViewModal({ sbtName }: ViewModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
+  const renderContent = () => {
+    switch (sbtName) {
+      case "Educational ID":
+        return <EducationalId />;
+      case "Passport ID":
+        return <PassportId />;
+      case "National ID":
+        return <NationalId />;
+      case "Employee ID":
+        return <EmployeeId />;
+      default:
+        return <div>Default Component</div>;
+    }
+  };
 
   return (
     <>
@@ -18,7 +40,7 @@ export function ViewModal({ sbtName }: { sbtName: string }) {
       </Button>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>{sbtName}</DialogHeader>
-
+        <DialogBody>{renderContent()}</DialogBody>
         <DialogFooter>
           <Button
             variant="gradient"
