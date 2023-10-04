@@ -6,7 +6,6 @@ import {
   ChevronUpDownIcon,
   DocumentDuplicateIcon,
 } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -15,25 +14,8 @@ import {
   Button,
   CardBody,
   Chip,
-  CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
-  Avatar,
-  IconButton,
   Tooltip,
 } from "@material-tailwind/react";
-
-// const TABS = [
-//   {
-//     label: "Active",
-//     value: "all",
-//   },
-//   {
-//     label: "Inactive",
-//     value: "monitored",
-//   },
-// ];
 
 const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Requested By", "Status", ""];
 
@@ -276,7 +258,6 @@ export default function VerificationRequestsTable() {
                           />
                         </div>
                       </td>
-                      {/* Allow , Deny for pending revoke for accepted */}
                       <td className={classes}>
                         {status === "Pending" && (
                           <div className="flex gap-4">

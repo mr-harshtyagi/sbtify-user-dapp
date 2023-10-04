@@ -1,7 +1,5 @@
 "use client";
 import {
-  CheckBadgeIcon,
-  ClipboardIcon,
   DocumentDuplicateIcon,
   IdentificationIcon,
 } from "@heroicons/react/24/outline";
@@ -10,9 +8,7 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Typography,
-  Button,
   Tooltip,
 } from "@material-tailwind/react";
 import { Account } from "../Account";

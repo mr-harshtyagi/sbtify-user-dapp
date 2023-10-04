@@ -39,7 +39,9 @@ export function ViewModal({ sbtName }: ViewModalProps) {
         View
       </Button>
       <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>{sbtName}</DialogHeader>
+        <DialogHeader className="flex justify-center items-center">
+          {sbtName}
+        </DialogHeader>
         <DialogBody>{renderContent()}</DialogBody>
         <DialogFooter>
           <Button

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
@@ -11,20 +10,11 @@ import {
   CardHeader,
   Input,
   Typography,
-  Button,
   CardBody,
-  Chip,
-  CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
-  Avatar,
-  IconButton,
   Tooltip,
 } from "@material-tailwind/react";
 import { ViewModal } from "./viewModal";
 import { sbts } from "@/constants/sbt";
-import PassportId from "../SBTs/PassportId";
 
 const TABLE_HEAD = ["SBT Name", "SBT Symbol", "Token ID", ""];
 
