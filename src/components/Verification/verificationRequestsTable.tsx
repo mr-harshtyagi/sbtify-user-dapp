@@ -100,6 +100,18 @@ export default function VerificationRequestsTable() {
     }, 2000);
   }
 
+  const handleClickAllow = () => {
+    console.log("Allowed!");
+  };
+
+  const handleClickDeny = () => {
+    console.log("Denied!");
+  };
+
+  const handleClickRevoke = () => {
+    console.log("Revoked!");
+  };
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -242,16 +254,29 @@ export default function VerificationRequestsTable() {
                           />
                         </div>
                       </td>
+                      {/* Allow , Deny for pending revoke for accepted */}
                       <td className={classes}>
-                        <Tooltip content="You can view this SBT">
-                          <Button
-                            color="green"
-                            onClick={handleClick}
-                            disabled={!(status == "Accepted")}
-                          >
-                            Verify
+                        {status === "Pending" && (
+                          <div className="flex gap-4">
+                            <Button color="green" onClick={handleClickAllow}>
+                              Allow
+                            </Button>
+
+                            <Button color="red" onClick={handleClickDeny}>
+                              Deny
+                            </Button>
+                          </div>
+                        )}
+
+                        {status === "Accepted" && (
+                          <Button color="red" onClick={handleClickRevoke}>
+                            Revoke
                           </Button>
-                        </Tooltip>
+                        )}
+
+                        {status === "Rejected" && (
+                          <Button disabled={true}>Denied</Button>
+                        )}
                       </td>
                     </tr>
                   );

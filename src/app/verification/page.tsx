@@ -13,9 +13,7 @@ import {
 import { Connected } from "@/components/Connected";
 import { DefaultSpinner } from "@/components/Spinner/page";
 import VerificationRequestsTable from "@/components/Verification/verificationRequestsTable";
-{
-  /* Allow , Deny for pending revoke for accepted */
-}
+
 const Verification = () => {
   // const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen((cur) => !cur);
