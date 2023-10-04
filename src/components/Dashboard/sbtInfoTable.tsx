@@ -70,7 +70,7 @@ export function SbtInfoTable() {
               Issued SBTs
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              List of all soul-bound tokens (SBTs) that are issued to user.
+              List of all soul-bound tokens (SBTs) that you hold.
             </Typography>
           </div>
         </div>

@@ -118,11 +118,10 @@ export default function VerificationRequestsTable() {
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-              All Sent Requests
+              All Received Requests
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              Here are all the requests you have sent to SBT holders for
-              verification.
+              Here are all the requests sent by organizations for verification.
             </Typography>
           </div>
           {/* <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
