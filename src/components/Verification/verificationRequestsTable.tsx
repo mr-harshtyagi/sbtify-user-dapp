@@ -84,7 +84,7 @@ export default function VerificationRequestsTable() {
       setFilteredRows(TABLE_ROWS);
     } else {
       let filtered = TABLE_ROWS.filter((row) =>
-        row.userName.toLowerCase().includes(searchTerm.toLowerCase())
+        row.sbtName.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredRows(filtered);
     }
