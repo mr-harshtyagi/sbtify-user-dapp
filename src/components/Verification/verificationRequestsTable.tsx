@@ -259,11 +259,11 @@ export default function VerificationRequestsTable() {
                         {status === "Pending" && (
                           <div className="flex gap-4">
                             <Button color="green" onClick={handleClickAllow}>
-                              Allow
+                              Approve
                             </Button>
 
                             <Button color="red" onClick={handleClickDeny}>
-                              Deny
+                              Reject
                             </Button>
                           </div>
                         )}
