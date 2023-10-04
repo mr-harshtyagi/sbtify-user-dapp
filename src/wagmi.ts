@@ -1,7 +1,7 @@
 import { getDefaultConfig } from "connectkit";
 import { createConfig } from "wagmi";
 import { Chain } from "@wagmi/core";
-import { mainnet } from "wagmi/chains";
+import { mainnet, hardhat } from "wagmi/chains";
 
 const walletConnectProjectId = "ac024c7d28d8bef7325a17fe7644c61e";
 
@@ -35,6 +35,6 @@ export const config = createConfig(
     autoConnect: true,
     appName: "P4W3-Organisation-dApp",
     walletConnectProjectId,
-    chains: [sapphireTestnet],
+    chains: [sapphireTestnet, hardhat],
   })
 );
