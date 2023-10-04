@@ -34,7 +34,7 @@ import {
 //   },
 // ];
 
-const TABLE_HEAD = ["SBT Address", "Token ID", "Issued By"];
+const TABLE_HEAD = ["SBT Address", "Token ID", ""];
 
 const TABLE_ROWS = [
   {
@@ -44,7 +44,6 @@ const TABLE_ROWS = [
     sbtName: "Digital Identity Token",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     tokenID: 20,
-    issuedBy: "Organization",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
@@ -53,7 +52,6 @@ const TABLE_ROWS = [
     sbtName: "Unique Identity Token",
     sbtAddress: "0xb8b39ed3BebE64f835463Cb8b9F046cB827F90f8",
     tokenID: 1560000,
-    issuedBy: "Organization",
   },
 ];
 
@@ -149,10 +147,7 @@ export function SbtInfoTable() {
               </>
             ) : (
               filteredRows.map(
-                (
-                  { sbtName, sbtSymbol, sbtAddress, tokenID, issuedBy },
-                  index
-                ) => {
+                ({ sbtName, sbtSymbol, sbtAddress, tokenID }, index) => {
                   const isLast = index === TABLE_ROWS.length - 1;
                   const classes = isLast
                     ? "p-4"
@@ -205,15 +200,16 @@ export function SbtInfoTable() {
                           </Typography>
                         </div>
                       </td>
+                      {/* Allow , Deny for pending revoke for accepted */}
                       <td className={classes}>
                         <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="black"
-                            className="font-bold"
+                          <Button
+                            color="green"
+                            type="submit"
+                            variant="gradient"
                           >
-                            {issuedBy}
-                          </Typography>
+                            View
+                          </Button>
                         </div>
                       </td>
                     </tr>
